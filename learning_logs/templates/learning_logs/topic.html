@@ -1,0 +1,10 @@
+{% extends "learning_logs/base.html" %}
+{% block content %}
+<h1>{{ topic }}</h1>
+<a href="{% url 'learning_logs:new_entry' topic.id %}" class="btn btn-success mb-3">+ Новая запись</a>
+{% for entry in entries %}<div class="card mb-3"><div class="card-body">
+  <h6 class="card-subtitle mb-2 text-muted">{{ entry.date_added|date:"d.m.Y H:i" }}</h6>
+  <p class="card-text">{{ entry.text|linebreaks }}</p>
+  <a href="{% url 'learning_logs:edit_entry' entry.id %}" class="btn btn-sm btn-outline-secondary">Редактировать</a>
+</div></div>{% empty %}<p class="text-muted">Записей пока нет.</p>{% endfor %}
+{% endblock %}
